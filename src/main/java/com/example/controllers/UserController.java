@@ -3,6 +3,7 @@ package com.example.controllers;
 import com.example.models.User;
 import com.example.repositories.UserRepository;
 import com.example.secret.PasswordUtils;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,15 +29,16 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public String addUserPost(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, Model model) {
+    public String addUserPost(@NotBlank(message = "Empty") @RequestParam String firstName,
+                              @NotBlank(message = "Empty") @RequestParam String lastName,
+                              @NotBlank(message = "Empty") @RequestParam String email,
+                              @NotBlank(message = "Empty") @RequestParam String password, Model model) {
         String status = "User";
         String salt = PasswordUtils.generateSalt();
         String passhash = PasswordUtils.generateHash(password + ":" + salt);
-//        String salt = "ytrewq";
-//        String passhash = "qwerty";
         User user = new User(firstName, lastName, email, status, passhash, salt);
         userRepository.save(user);
-        return "redirect:/homepage";
+        return "redirect:/";
     }
 
 }

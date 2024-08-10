@@ -77,3 +77,15 @@ nav.nav-masthead .nav-link:hover {
     animation-name: fadeIn;
     animation-duration: 2s;
 }
+
+.margin-nav {
+    margin-right: 10px; /* Устанавливает правый отступ для каждого элемента */
+}
+
+.nav-link:first-child {
+    margin-left: 10px; /* Устанавливает левый отступ для первого элемента */
+}
+
+.nav-link:last-child {
+    margin-right: 10px; /* Устанавливает правый отступ для последнего элемента */
+}

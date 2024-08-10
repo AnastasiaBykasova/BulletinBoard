@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class BlogController {
@@ -41,62 +44,14 @@ public class BlogController {
         return "redirect:/blog";
     }
 
+    @GetMapping("/blog/{id}")
+    public String viewPost(@PathVariable(value = "id") Long id, Model model) {
+        Optional<Post> post = postRepository.findById(id);
+        ArrayList<Post> res = new ArrayList<>();
+        post.ifPresent(res::add);
+        model.addAttribute("viewPost", res);
+        return "viewPost";
+    }
+
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//package com.example.controllers;
-//
-//import com.example.models.Post;
-//import com.example.repositories.PostRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//
-//import java.time.LocalDateTime;
-//import java.time.ZoneId;
-//import java.util.Date;
-//import java.sql.Date;
-//
-//@Controller
-//public class BlogController {
-//    @Autowired
-//    private PostRepository postRepository;
-//
-//    @GetMapping("/blog")
-//    public String blog(Model model) {
-//        return "blog";
-//    }
-//
-//    @GetMapping("/addPost")
-//    public String addPostGet(Model model) {
-//        return "addPost";
-//    }
-//
-//    @PostMapping("/addPost")
-//    public String addPostPost(@RequestParam String categoryStr, @RequestParam String newPostText, Model model) {
-//        long category_id = Long.parseLong(categoryStr);
-//        long id = 1;
-//        LocalDateTime localDateTime = LocalDateTime.now();
-//        // Преобразование LocalDateTime в java.util.Date
-//        Date utilDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-//        // Преобразование java.util.Date в java.sql.Date
-//        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-//        Post post = new Post(id, category_id, newPostText, postDate);
-//        postRepository.save(post);
-//        return "redirect:/blog";
-//    }
-//}

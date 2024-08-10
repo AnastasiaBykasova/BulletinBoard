@@ -62,7 +62,6 @@
         <div th:each="user : ${users}" class="alert alert-info mt-2">
             <h3 th:text="${user.firstName}"></h3>
             <h3 th:text="${user.lastName}"></h3>
-            <a th:href="'/usersPage/' + ${user.id}">More</a>
         </div>
     </div>
     

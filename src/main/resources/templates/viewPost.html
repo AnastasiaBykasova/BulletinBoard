@@ -60,11 +60,14 @@
 
     <div class="container mt-5">
         <h1>It's a blog place</h1>
-        <div th:each="post : ${posts}" class="alert alert-info mt-2">
+        <div th:each="post : ${viewPost}" class="alert alert-info mt-2">
             <h3 th:text="${post.postTheme}"></h3>
-<!--            <h3 th:text="${postEl.postdate}"></h3>-->
+            <!--            <h3 th:text="${postEl.postdate}"></h3>-->
             <h3 th:text="${#dates.format(post.postDate, 'dd/MM/yyyy')}"></h3>
+            <h6 th:text="${post.postText}"/>
             <a th:href="'/blog/' + ${post.id}" class="btn btn-warning">Read post</a>
+<!--            <a th:href="'/blog/' + ${post.id} + '/edit'" class="btn btn-warning">Edit post</a>-->
+<!--            <a th:href="'/blog/' + ${post.id} + '/remove'" class="btn btn-warning">Remove post</a>-->
         </div>
     </div>
 
