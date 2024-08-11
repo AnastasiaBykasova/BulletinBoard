@@ -60,8 +60,8 @@
     <div class="container mt-5">
         <h1>Users of the site</h1>
         <div th:each="user : ${users}" class="alert alert-info mt-2">
-            <h3 th:text="${user.firstName}"></h3>
-            <h3 th:text="${user.lastName}"></h3>
+            <h4 th:text="${user.firstName + ' ' + user.lastName}"></h4>
+<!--            <h3 th:text="${user.lastName}"></h3>-->
         </div>
     </div>
     
