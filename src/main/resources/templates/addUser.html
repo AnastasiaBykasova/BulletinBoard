@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="Registration"/>
+    <title th:text="Authorization"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <!--    <link rel="stylesheet" href="../static/css/styles.css">-->
@@ -11,11 +11,18 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header th:insert="~{blocks/header :: header}"></header>
 
+    <div class="container mt-5 mb-10">
+        <h1>Authorisation</h1>
+        <form action="/addUser" method="post">
+            <input type="text" name="authEmail" placeholder="Email">
+            <input type="password" name="authPassword" placeholder="Password">
+            <button type="submit" class="btn btn-success">Done</button><br>
+        </form>
+    </div>
 
     <div class="container mt-5 mb-10">
         <h1>Registration</h1>
         <form action="/addUser" method="post">
-            <h4>Choose the topic</h4><br>
             <input type="text" name="firstName" placeholder="First name">
             <input type="text" name="lastName" placeholder="Last name">
             <input type="text" name="email" placeholder="Email">
