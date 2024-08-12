@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="NewPost"/>
+    <title th:text="Authorization"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link th:insert="~{blocks/stylesLink :: stylesLink}">
 </head>
@@ -12,21 +12,15 @@
 
 
     <div class="container mt-5 mb-10">
-        <h1>Create new post</h1>
-        <form action="/addPost" method="post">
-            <h4>Choose the topic</h4><br>
-            <select name="categoryStr">
-                <option value="1">Entertainments</option>
-                <option value="2">Science</option>
-                <option value="3">Health</option>
-                <option value="4">Technologies</option>
-            </select><br>
-            <input type="text" name="newPostTheme" placeholder="Post theme">
-            <textarea type="postText" name="newPostText" placeholder="Post text"></textarea><br>
+        <h1>Registration</h1>
+        <form action="/authUser" method="post">
+            <h4>Enter data</h4><br>
+            <input type="text" name="authEmail" placeholder="Email">
+            <input type="password" name="authPassword" placeholder="Password">
             <button type="submit" class="btn btn-success">Done</button><br>
         </form>
-
     </div>
+
 
     <footer th:insert="~{blocks/footer :: footer}"></footer>
 </div>

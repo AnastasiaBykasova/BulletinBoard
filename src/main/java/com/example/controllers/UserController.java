@@ -2,7 +2,7 @@ package com.example.controllers;
 
 import com.example.models.User;
 import com.example.repositories.UserRepository;
-import com.example.secret.PasswordUtils;
+import com.example.security.PasswordUtils;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,16 +29,37 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public String addUserPost(@NotBlank(message = "Empty") @RequestParam String firstName,
-                              @NotBlank(message = "Empty") @RequestParam String lastName,
-                              @NotBlank(message = "Empty") @RequestParam String email,
-                              @NotBlank(message = "Empty") @RequestParam String password, Model model) {
+    public String addUserPost(@NotBlank(message = "Empty name") @RequestParam String firstName,
+                              @NotBlank(message = "Empty name") @RequestParam String lastName,
+                              @NotBlank(message = "Empty email") @RequestParam String email,
+                              @NotBlank(message = "Empty password") @RequestParam String password, Model model) {
         String status = "User";
         String salt = PasswordUtils.generateSalt();
         String passhash = PasswordUtils.generateHash(password + ":" + salt);
         User user = new User(firstName, lastName, email, status, passhash, salt);
         userRepository.save(user);
         return "redirect:/";
+    }
+
+    @GetMapping("/authUser")
+    public String usersAuthGet(Model model) {
+        return "authUser";
+    }
+
+    @PostMapping("/authUser")
+    public String authUserPost(@NotBlank(message = "Empty email") @RequestParam String authEmail,
+                              @NotBlank(message = "Empty password") @RequestParam String authPassword, Model model) {
+
+        PasswordUtils passwordUtils = new PasswordUtils(userRepository);
+        long idByEmail = passwordUtils.checkEmail(authEmail);
+        long idByPass = -1;
+        if (idByEmail >= 0) {
+            idByPass = passwordUtils.checkPassword(idByEmail, authPassword);
+        }
+        if (idByPass >= 0) {
+            return "redirect:/";
+        }
+        return "smth";
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 //import org.springframework.data.annotation.Id;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class User {
     @Column(name = "lastname")
     private String lastName;
     @Column(name = "email", unique = true, nullable = false)
+    @Email
     private String email;
     @Column(name = "status")
     private String status;

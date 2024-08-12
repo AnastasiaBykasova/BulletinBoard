@@ -1,0 +1,30 @@
+body {
+  background-color: #E6E6FA; /* Лавандовый фон */
+  color: #333; /* Темно-серый текст */
+}
+
+.text-bg-dark {
+  background-color: #800080; /* Фиолетовый цвет для темного текста */
+}
+
+.d-flex {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Дополнительные стили для элементов на странице */
+h1, h2, h3 {
+  color: #FFFFFF; /* Белый цвет для заголовков */
+}
+
+a {
+  color: #FFFFFF; /* Белый цвет для ссылок */
+}
+
+a:hover {
+  text-decoration: none; /* Убираем подчеркивание при наведении */
+  color: #D8BFD8; /* Лавандовый цвет при наведении */
+}
